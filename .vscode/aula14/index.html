@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
     <script type="text/javascript" src="extjs/ext.js"></script>
 </head>
-<body></body>
+<body><div id="estadosBr"></div></body>
     <script type="text/javascript">
 
     var estadosBrasileiros = [
@@ -37,6 +37,31 @@
         [27,'Tocantins','TO']
         ];
 
+        Ext.define('Estado',{
+            extend: 'Ext.data.Model',
+            fields: ['id','nome','sigla']
+        });
+
+        Ext.define('EstadoStore',{
+            extend: 'Ext.data.ArrayStore',
+            model: 'Estado',
+            data: estadosBrasileiros
+        })
+
+        Ext.onReady(function(){
+
+            var store = Ext.create('EstadoStore');
+        
+            console.log(store);
+
+            var tpl = Ext.create('Ext.XTemplate',
+                '<h1>Estados Brasileiros</h1>',
+                '<tpl for=".">',
+                '<p>{data.nome} - {data.sigla}</p>',
+                '</tpl>'
+            );
+            tpl.overwrite('estadosBr', store.data.items);
+        })
 
 </script>
 </html>
