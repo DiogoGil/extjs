@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+<script type="text/javascript" src="extjs/ext.js"></script>
+</head>
+<body></body>
+    <script type="text/javascript">
+
+    Ext.define('Contato', {
+    extend: 'Ext.data.Model',
+
+        fields: [
+            {name: 'ID', type: 'int'},
+            {name: 'meuNome', type: 'string', mapping: 'nome'},
+            {name: 'sobrenome', type: 'string'},
+        ],
+
+        proxy: {
+            type: 'ajax',
+            url: 'contatos/lista.json',
+            format: 'json',
+        },
+    });
+
+    Ext.define('ContatosStore',{
+        extend: 'Ext.data.Store',
+        model: 'Contato',
+        proxy: {
+            type: 'ajax',
+            api: {
+                create: 'php/xml/criaContato.php',
+                read: 'php/xml/criaContato.php',
+                update: 'php/xml/attContato.php',
+                destroy: 'php/xml/delContato.php'
+            },
+
+            reader: {
+                type: 'xml',
+                root: 'contatos',
+                record: 'contato',
+            },
+
+            writer: {
+                type: 'xml',
+                root: 'contatos',
+                record: 'contato',
+                writeAllFields: true,
+                encode: true,
+                nameProperty: 'mapping',
+            }
+        },
+        autoload: true,
+    });
+
+    Ext.onReady(function(){
+
+        var store = Ext.create('ContatosStore');
+
+        console.log(store);
+
+        store.on('load', function(){
+            console.log(s.data);
+            var contato = Ext.create('Contato',{
+                nome: 'Andrézin',
+                email: 'And@ré.com',
+            });
+            var contatoAtualizado = s.getAt(0);
+            contatoAtualizado.set('meuNome', 'André');
+        });
+    });
+
+        
+
+    </script>
+</html>
