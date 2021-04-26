@@ -15,19 +15,17 @@ Ext.define('Curso.Janela',{
         {
             xtype: 'panel',
             title: 'Painel 1',
-            x:  10 -10,
-            y: 10,
-            html: 'conteúdo do painel 1',
+            html: 'centro',
+            region: 'center',
         },{
             xtype: 'panel',
             title: 'Painel 2',
-            x: 50 -50,
-            y: 70,
-            html: 'conteúdo do painel 2',
-        }//,{
-        //     xtype: 'panel',
-        //     title: 'Painel 3',
-        // }
+            html: 'oeste',
+            region: 'west',
+            width: '10%',
+            collapsible: true,
+            split: true,
+        }
     ]
 });
 
