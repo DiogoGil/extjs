@@ -78,6 +78,7 @@ Ext.onReady(function(){
     Ext.create('Ext.button.Split', {
         renderTo: 'btn10',
         text: 'Options',
+        tooltip: 'tooltip do botao',
         handler: function() {
             console.log("The Button Was Cliked");
         },
