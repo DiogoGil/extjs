@@ -1,47 +1,32 @@
+Ext.create('Ext.data.Store',{
+    storeId: 'simpsonsStore',
+    fields: ['name', 'email', 'phone'],
+    data: {'itens': [
+        {'name': 'Lisa', 'email': 'lisa@simpsons.com', 'phone':'555-222-111'},
+        {'name': 'Bart', 'email': 'bart@simpsons.com', 'phone':'555-222-111'},
+        {'name': 'Homer', 'email': 'homer@simpsons.com', 'phone':'555-222-111'},
+        {'name': 'Marge', 'email': 'marge@simpsons.com', 'phone':'555-222-111'}
+    ]},
+    proxy: {type: 'memory',
+    reader:{
+        type: 'json',
+        root: 'items'
+    }}
+})
+
 Ext.define('Curso.Grid',{
     extend: 'Ext.panel.Grid',
 
-    heigth: 400,
-    width: 500,
     title: 'Aula 43',
-
-    autoShow: true,
-
-    // autoScroll: true,
-
-    layout: {
-        type: 'table'/*,
-        align: 'stretch'*/
-    },
-    
-    items: [
-        {
-            xtype: 'panel',
-            title: 'Painel 1',
-            html: 'Hbox 1',
-            width: '200',
-            flex: 1,
-        },{
-            xtype: 'panel',
-            title: 'Painel 2',
-            html: 'Hbox 2',
-            width: '400',
-            flex: 1,
-        },{
-            xtype: 'panel',
-            title: 'Painel 3',
-            html: 'Hbox 3',
-            dockedItems: [{
-                xtype: 'toolbar',
-                dock: 'bottom',
-                items: [{
-                    text: 'Next'
-                }]
-            }],
-            width: '100%',
-            flex: 1,
-        }
-    ]
+    store: Ext.data.StoreManager.lookup('simpsonsStore'),
+    columns: [
+        {text: 'Name', dataIndex: 'name'},
+        {text: 'Email', dataIndex: 'email',flex: 1},
+        {text: 'Phone', dataIndex: 'phone'}
+    ],
+    height: 200,
+    width: 400,
+    renderTo: Ext.getBody(),
 });
 
 Ext.onReady(function(){

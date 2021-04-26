@@ -41,6 +41,13 @@ Ext.define('Curso.Janela',{
             width: '10%',
             collapsible: true,
             split: true,
+        },{
+            xtype: 'panel',
+            title: 'Painel 5',
+            html: 'sul',
+            region: 'south',
+            collapsible: true,
+            split: true,
         }
     ]
 });
